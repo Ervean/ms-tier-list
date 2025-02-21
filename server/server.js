@@ -50,6 +50,17 @@ app.put("/jobs/description/:id", async (req, res) => {
     }
 });
 
+//delete a job
+app.delete("/jobs/:id", async(req, res) => {
+    try {
+        const { id } = req.params;
+        console.log("Deleting is not available for now"); // this is an example
+     //   const deleteJob = await pool.query("DELETE FROM jobs WHERE id = $1", [ id ]);
+    } catch (error) {
+        console.log(error.err);
+    }
+});
+
 
 app.get("/api/home", (req, res) => {
     res.json({ message:  "Hello World!" });
