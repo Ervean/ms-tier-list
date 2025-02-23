@@ -1,8 +1,8 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import Navbar from './(components)/navbar';
-import Sidebar from './(components)/sidebar';
+import Navbar from './(components)/Navbar';
+import Sidebar from './(components)/Sidebar';
 
 const localHostUri = "http://localhost:8080/";
 
@@ -31,12 +31,6 @@ export default function index() {
     <div>
       <Navbar />
       <Sidebar />
-      <h1>{loading}</h1>
-      <div>
-        {jobs.map((job) => (
-          <h1 key={job.name}>{job.name}</h1>
-        ))}
-      </div>
       </div>
   );
 }
