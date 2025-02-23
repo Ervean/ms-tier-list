@@ -1,25 +1,42 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
+import Navbar from './(components)/navbar';
+import Sidebar from './(components)/sidebar';
 
-function index() {
+const localHostUri = "http://localhost:8080/";
 
-  const [message, setMessage] = useState("Loading...");
+export default function index() {
+
+  const [loading, setLoading] = useState("Loading...");
+  const [jobs, setJobs] = useState([]);
+
+  const getJobs = async () => {
+    try {
+      const response = await fetch(`${localHostUri}jobs`);
+      const jsonData = await response.json();
+      console.log(jsonData);
+      setJobs(jsonData);
+      setLoading('Loading Completed!');
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/home").then(
-      response => response.json()
-    ).then(
-      data => {
-        console.log(data)
-        setMessage(data.message);
-      }
-    )
-  },[])
+    getJobs();
+  },[]);
 
   return (
-    <div>{message}</div>
+    <div>
+      <Navbar />
+      <Sidebar />
+      <h1>{loading}</h1>
+      <div>
+        {jobs.map((job) => (
+          <h1 key={job.name}>{job.name}</h1>
+        ))}
+      </div>
+      </div>
   );
 }
-
-export default index;
