@@ -1,8 +1,8 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import Navbar from './(components)/Navbar';
-import Sidebar from './(components)/Sidebar';
+import Navbar from './_components/Navbar';
+import Sidebar from './_components/Sidebar';
 
 const localHostUri = "http://localhost:8080/";
 
