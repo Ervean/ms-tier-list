@@ -1,6 +1,6 @@
 import express, { query } from "express";
 import cors from 'cors';
-import pool from "./db.js";
+import supabase from "./db.js";
 
 const app = express();
 const PORT = 8080;
@@ -10,12 +10,14 @@ app.use(cors());
 app.use(express.json());
 
 //routes
+//
 
 //Get all Jobs
 app.get("/jobs", async(req, res) => {
     try{
-        const allJobs = await pool.query("SELECT * FROM jobs");
-        res.json(allJobs.rows);
+        console.log("Trying to get jobs");
+        let jobs = await supabase.from('jobs').select('*');
+        res.status(200).json(jobs.data);
     } catch(err){
         console.error(err.message);
     }
@@ -24,11 +26,10 @@ app.get("/jobs", async(req, res) => {
 //Get a job
 app.get("/jobs/:id", async(req, res) => {
     try {
-        console.log(req.params);
         const { id } = req.params;
-        const job = await pool.query("SELECT * FROM jobs WHERE id = $1",[id]);
-        if(job.rowCount >= 1) {
-            res.json(job.rows[0]);
+        const job = await supabase.from('jobs').select('*').eq('id', id);
+        if(job.data.length >= 1) {
+            res.status(200).json(job.data[0]);
         } else {
             res = null;
         }
@@ -37,30 +38,32 @@ app.get("/jobs/:id", async(req, res) => {
     }
 });
 
+/*
 //update description
-app.put("/jobs/description/:id", async (req, res) => {
+app.put("/jobs/description/:id", async (req, res) => { // disabled due to not needing and not working
     try {
         const { id } = req.params;
         console.log("trying to update description for " + id);
         const { description } = req.body;
-        const updateJobDescription = await pool.query("UPDATE jobs SET description = $1 WHERE id = $2", [description, id]);
+        const updateJobDescription = await supabase.from('jobs').update({description: {description}}).eq('id', id).select('*');
         res.json(`Job id: ${id} description was updated to ${description}`);
     } catch (err) {
         console.error(err.message);
     }
 });
-
+*/
+/*
 //delete a job
 app.delete("/jobs/:id", async(req, res) => {
     try {
         const { id } = req.params;
         console.log("Deleting is not available for now"); // this is an example
-     //   const deleteJob = await pool.query("DELETE FROM jobs WHERE id = $1", [ id ]);
+     //   const deleteJob = await supabase.query("DELETE FROM jobs WHERE id = $1", [ id ]);
     } catch (error) {
         console.log(error.err);
     }
 });
-
+*/
 
 app.get("/api/home", (req, res) => {
     res.json({ message:  "Hello World!" });
