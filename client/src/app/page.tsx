@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Sidebar from './_components/Sidebar';
+import dotenv from "dotenv";
+dotenv.config();
 
 const localHostUri = "http://localhost:8080/";
 

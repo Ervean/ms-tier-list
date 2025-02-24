@@ -1,6 +1,13 @@
-import React from 'react';
+'use client'
+
+import React, { useState, useEffect } from 'react';
+import FlexBox from './_components/Flexbox';
 
 export default function Classes()
 {
-    return <div>classes</div>;
+    return (
+      <div>
+        <FlexBox />
+      </div>
+    );
 }

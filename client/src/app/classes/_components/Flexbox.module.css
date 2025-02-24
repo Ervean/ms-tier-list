@@ -1,0 +1,17 @@
+
+
+.container {
+    padding: 1px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 50px;
+}
+
+.container .item {
+    border: 1px solid red;
+    height: 200px;
+    width: 150px;
+    align-content:center;
+    text-align: center;
+}

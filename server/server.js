@@ -17,6 +17,7 @@ app.get("/jobs", async(req, res) => {
     try{
         console.log("Trying to get jobs");
         let jobs = await supabase.from('jobs').select('*');
+        jobs.data.sort((a,b) => a.name.localeCompare(b.name));
         res.status(200).json(jobs.data);
     } catch(err){
         console.error(err.message);
