@@ -17,6 +17,22 @@ body {
     font-size: 3rem;
 }
 
+.middleTitle {
+    font-size: 3rem;
+    padding-right: 20;
+}
+
+.nav #title {
+    display: flex;
+}
+
+.nav #sherb {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    padding-bottom: 5;
+}
+
+
 .nav ul {
     padding: 0;
     margin: 0;

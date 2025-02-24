@@ -1,17 +1,19 @@
 import styles from "./Navbar.module.css";
+import Image from "next/image";
 
 export default function Navbar() {
     return (
     <nav className={styles.nav}>
+        <li id={styles.title}>
+           <Image 
+        src="/images/sherb.png"
+        width={75}
+        height={75}
+        alt="sherb"
+        id={styles.sherb} />
         <a href="/" className={styles.title}>Sherb</a>
-        <ul>
-            <li className={styles.active}>
-                <a href="/test1">test1</a>
-            </li>
-            <li className={styles.active}>
-                <a href="/test2">test2</a>
-            </li>
-        </ul>
+        </li>
+        <div className={styles.middleTitle}>Maplestory Tier List</div>
     </nav>
     )
 }
