@@ -22,7 +22,7 @@ export default function JobsFlexBox()
          setJobs(jsonData);
          setLoading('Loading Completed!');
        } catch (err) {
-         console.error(err.message);
+        console.log({ error: err instanceof Error ? err.message : "Failed to do something exceptional" });
        }
      }
    

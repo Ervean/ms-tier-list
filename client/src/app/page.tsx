@@ -5,7 +5,7 @@ import Sidebar from './_components/Sidebar';
 import dotenv from "dotenv";
 dotenv.config();
 
-const localHostUri = "http://localhost:8080/";
+const localHostUri = process.env.NEXT_PUBLIC_LOCALHOSTURL;
 
 export default function index() {
 
@@ -21,7 +21,7 @@ export default function index() {
       setJobs(jsonData);
       setLoading('Loading Completed!');
     } catch (err) {
-      console.error(err.message);
+      console.log({ error: err instanceof Error ? err.message : "Failed to do something exceptional" });
     }
   }
 
