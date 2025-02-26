@@ -10,9 +10,9 @@ export const SidebarData = [
         link: "/"
     },
     {
-        title: "Classes",
+        title: "Jobs",
         icon: <GroupsIcon />,
-        link: "/classes"
+        link: "/jobs"
     },
     {
         title: "Tier List",

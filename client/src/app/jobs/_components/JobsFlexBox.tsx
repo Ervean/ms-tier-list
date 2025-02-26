@@ -2,16 +2,17 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import styles from './Flexbox.module.css';
+import styles from './JobsFlexbox.module.css';
+import { useRouter } from 'next/navigation';
 
 const localHostUri = "http://localhost:8080/";
 
-export default function FlexBox()
+export default function JobsFlexBox()
 {
      const [loading, setLoading] = useState("Loading...");
      const [jobs, setJobs] = useState([]);
-   
-   
+     const router = useRouter();
+
      const getJobs = async () => {
        try {
         console.log(`${localHostUri}`);
@@ -30,16 +31,21 @@ export default function FlexBox()
 
      },[]);
 
+     const handleClick = (job: any) => {
+      router.push(`/jobs/${job.name}`);
+     }
+
      return (
         <div>
           <div className={styles.container}>
-            {jobs.map((job, i) => {
+            {jobs.map((job: any, i) => {
               return (
                 <div 
                 key={`item ${i}`}
                 className={styles.item}
+                onClick={() => handleClick(job)}
                 >
-                  {job.name}
+                  {job.display_name}
                 </div>
               );
             })}

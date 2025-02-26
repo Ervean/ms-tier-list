@@ -16,7 +16,12 @@ app.use(express.json());
 app.get("/jobs", async(req, res) => {
     try{
         console.log("Trying to get jobs");
-        let jobs = await supabase.from('jobs').select('*');
+        let query = supabase.from('jobs').select('*');
+        const name = req.query.name;
+        if(name) {
+            query = query.eq('name', req.query.name);
+        }
+        let jobs = await query;
         jobs.data.sort((a,b) => a.name.localeCompare(b.name));
         res.status(200).json(jobs.data);
     } catch(err){
@@ -38,6 +43,9 @@ app.get("/jobs/:id", async(req, res) => {
         console.error(err.message);
     }
 });
+
+//Get a job by name
+//app.get("jobs/:name")
 
 /*
 //update description
