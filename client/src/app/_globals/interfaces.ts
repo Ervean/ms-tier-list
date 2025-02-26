@@ -1,6 +1,5 @@
 
-
-interface Job {
+export interface Job {
     id: number,
     display_name: string,
     is_deleted: boolean,
@@ -12,5 +11,3 @@ interface Job {
     name: string,
     description: string
 }
-
-export default Job;

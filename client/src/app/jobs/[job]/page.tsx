@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, notFound  } from 'next/navigation';
+import Job from './_globals/interfaces';
 
 const localHostUri = process.env.NEXT_PUBLIC_LOCALHOSTURL;
 
 export default function JobDetails() {
     const params = useParams<{job: any}>();
     const [jobName, setJobName] = useState<string>(params.job);
-    const [jobDetails, setJobDetails] = useState();
+    const [jobDetails, setJobDetails] = useState<Job>();
 
     const getJob = async () => {
         try {
@@ -17,7 +18,7 @@ export default function JobDetails() {
           console.log(jsonData);
           if(jsonData) {
             console.log('we json data ');
-            setJobDetails(jsonData);
+            setJobDetails((jsonData as Job[])[0]);
             console.log(jobDetails);
           } else {
             return notFound;
@@ -35,7 +36,7 @@ export default function JobDetails() {
     console.log(jobName);
     return (
         <div>
-            <h1>jobName</h1>
+            <h1>{jobDetails ? jobDetails.display_name : ""}</h1>
         </div>
     )
 }
