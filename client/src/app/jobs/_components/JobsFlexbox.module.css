@@ -14,9 +14,23 @@
     width: 150px;
     align-content:center;
     text-align: center;
+    overflow: hidden;
 }
 
 .container .item:hover {
     cursor: pointer;
     background-color: #555;
+}
+
+.container .item .icon {
+    align-content: center;
+    height: 200px;
+    width: 150px;
+    background-size: cover;
+    overflow: hidden;
+    background-repeat: no-repeat;
+}
+
+.container .item .icon:hover {
+    transform: scale(1.25);
 }

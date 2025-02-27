@@ -9,5 +9,6 @@ export interface Job {
     class_id: number,
     origin_id: number,
     name: string,
-    description: string
+    description: string,
+    thumbnail_url: string
 }

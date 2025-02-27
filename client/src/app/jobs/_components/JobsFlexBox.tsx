@@ -4,13 +4,14 @@
 import React, { useState, useEffect } from 'react';
 import styles from './JobsFlexbox.module.css';
 import { useRouter } from 'next/navigation';
+import Job from './_globals/interfaces';
 
-const localHostUri = "http://localhost:8080/";
+const localHostUri = process.env.NEXT_PUBLIC_LOCALHOSTURL;
 
 export default function JobsFlexBox()
 {
      const [loading, setLoading] = useState("Loading...");
-     const [jobs, setJobs] = useState([]);
+     const [jobs, setJobs] = useState<Job[]>([]);
      const router = useRouter();
 
      const getJobs = async () => {
@@ -19,7 +20,7 @@ export default function JobsFlexBox()
          const response = await fetch(`${localHostUri}jobs`);
          const jsonData = await response.json();
          console.log(jsonData);
-         setJobs(jsonData);
+         setJobs(jsonData as Job[]);
          setLoading('Loading Completed!');
        } catch (err) {
         console.log({ error: err instanceof Error ? err.message : "Failed to do something exceptional" });
@@ -31,21 +32,25 @@ export default function JobsFlexBox()
 
      },[]);
 
-     const handleClick = (job: any) => {
+     const handleClick = (job: Job) => {
       router.push(`/jobs/${job.name}`);
      }
 
      return (
         <div>
           <div className={styles.container}>
-            {jobs.map((job: any, i) => {
+            {jobs.map((job: Job, i) => {
               return (
                 <div 
                 key={`item ${i}`}
                 className={styles.item}
                 onClick={() => handleClick(job)}
                 >
-                  {job.display_name}
+                  <div
+                  className={styles.icon}
+                  style={{backgroundImage: `url(${job.thumbnail_url})`, width: 250, height: 250, marginLeft: -40, color: 'white'}}
+                  >
+                  </div>
                 </div>
               );
             })}

@@ -1,42 +1,25 @@
-'use client'
-
-import React, { useState, useEffect } from 'react';
-import { useParams, notFound  } from 'next/navigation';
+import React from 'react';
 import Job from './_globals/interfaces';
 
-const localHostUri = process.env.NEXT_PUBLIC_LOCALHOSTURL;
+const localHostUrl = process.env.NEXT_PUBLIC_LOCALHOSTURL;
 
-export default function JobDetails() {
-    const params = useParams<{job: any}>();
-    const [jobName, setJobName] = useState<string>(params.job);
-    const [jobDetails, setJobDetails] = useState<Job>();
 
-    const getJob = async () => {
-        try {
-          const response = await fetch(`${localHostUri}jobs/?name=${jobName}`);
-          const jsonData = await response.json();
-          console.log(jsonData);
-          if(jsonData) {
-            console.log('we json data ');
-            setJobDetails((jsonData as Job[])[0]);
-            console.log(jobDetails);
-          } else {
-            return notFound;
-          }
-        } catch (err) {
-            console.log({ error: err instanceof Error ? err.message : "Failed to do something exceptional" });
-          return notFound;
-        }
-      }
-    
-    useEffect(() => {
-        getJob();
-    }, []);
-
-    console.log(jobName);
+export default async function Page( {
+    params,
+}: {
+    params: Promise <{job: string}>
+})  {
+    const jobParam = (await params).job;
+    const data = await fetch(`${localHostUrl}jobs/?name=${jobParam}`);
+    const jobs = await (data.json()) as Job[];
+    if(jobs.length === 0) {
+        return <div>Not Found</div>;
+    }
+    const job = jobs[0];
     return (
-        <div>
-            <h1>{jobDetails ? jobDetails.display_name : ""}</h1>
-        </div>
-    )
-}
+      <div>
+        <div>{job.display_name} </div>
+        <div>{job.description}</div>
+      </div>
+    );
+  }
