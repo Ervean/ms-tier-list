@@ -1,0 +1,38 @@
+
+.content {
+    padding: 50;
+}
+
+.breadcrumb {
+    display: flex;
+}
+
+.breadcrumb .redirect{
+    font-size: 20;
+    color: grey;
+}
+
+.breadcrumb .currentPage {
+    font-size: 20;
+}
+
+.breadcrumb .divider {
+    padding-left: 10;
+    padding-right: 10;
+    font-size: 20;
+}
+
+.title {
+    padding: 30;
+    height: 250;
+    align-content: center;
+    display: flex;
+}
+
+.title .icon {
+    min-height: 400;
+    min-width: 400;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: -100;
+}

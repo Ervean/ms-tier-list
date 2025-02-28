@@ -13,7 +13,7 @@ export default function Navbar() {
         id={styles.sherb} />
         <a href="/" className={styles.title}>Sherb</a>
         </li>
-        <div className={styles.middleTitle}>Maplestory Tier List</div>
+        <div className={styles.middleTitle}>MapleStory</div>
     </nav>
     )
 }
